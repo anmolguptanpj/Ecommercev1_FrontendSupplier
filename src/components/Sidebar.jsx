@@ -12,7 +12,6 @@ function Sidebar() {
         <Link to='/orders'>Orders</Link>
         <Link to='/payments'>Payments</Link>
         <Link to='/customer'>Customers</Link>
-        <Link to='/suppliers'>Suppliers</Link>
         <Link to='/returns'>Returns</Link>
         <Link to='/sales'>Sales</Link>
         <Link to='/staff'>Staff</Link>

@@ -11,9 +11,10 @@ import Return from './pages/Return'
 import Customer from './pages/Customer'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
-import Products from './pages/Products'
+import Products from './pages/Products/Products'
 import Staff from './pages/Staff'
 import './App.css'
+import AddProducts from './pages/Products/CreateProducts'
 
 function App() {
 
@@ -48,7 +49,7 @@ function App() {
     <Route path="/customer" element={<Customer/>}/>
     <Route path="/staff" element={<Staff/>}/>
     <Route path="/profile" element={<Profile/>}/>
-    <Route path="/products" element={<Products/>}/>
+    <Route path="/products/*" element={<Products/>}/>
     </Route>
 
     <Route element= {<SecLayout/>} >

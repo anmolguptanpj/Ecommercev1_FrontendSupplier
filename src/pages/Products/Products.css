@@ -1,0 +1,32 @@
+#Pr_header{
+display:flex;
+flex-direction: column;
+height: 12vh;
+width: 80vw;
+border: red 2px solid;
+}
+
+
+#Pr_content{
+flex:1;
+overflow-y: auto;
+}
+
+#Pr_main{
+    height: 90vh;
+    display:flex;
+    flex-direction: column;
+}
+
+#Pr_HMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
+}
+
+#hLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
