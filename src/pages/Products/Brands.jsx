@@ -2,7 +2,9 @@ import React from 'react'
 
 function Brands() {
   return (
-    <div>Brands</div>
+    <div>
+      <div>Brands</div>
+    </div>
   )
 }
 
