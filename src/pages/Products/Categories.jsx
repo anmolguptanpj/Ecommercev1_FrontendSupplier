@@ -1,95 +1,128 @@
-import { useMutation, useQueryClient,useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
-import api from '../../api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import api from '../../api'
 
+export default function Categories() {
+  const queryClient = useQueryClient()
 
-function Categories() {
+  const [category, setCategory] = useState('')
+  const [subCategory, setSubCategory] = useState('')
+  const [parentCategoryId, setParentCategoryId] = useState('')
 
-  const queryClient = useQueryClient();
-
-
-
-  const [category,setCategory] = useState("")
-  const [subCategory,setSubCategory] = useState("")
-  const [parentCategoryId,setParentCategoryId] = useState("")
-
-
-  const {data:categories,isLoading} = useQuery({
-    queryKey:["categories"],
-    queryFn: async()=>{
-      const res = await api.get("/categories");
-      return res.data;
-    }
-  });
-
-  const {mutate: createCategory, isPending , isError,error } = useMutation({
-    mutationFn: async()=>{
-      return await api.post("/categories",{name: category});
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["categories"]);
-      setCategory("")
+  // Fetch categories (default to empty array so .map is safe)
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await api.get('/categories')
+      return res.data
     }
   })
 
-    const {mutate: createSubCategory, isPending:subLoading , isError : subError ,error :sub } = useMutation({
-    mutationFn: async({parentId,name})=>{
-      return await api.post(`/categories/${parentId}/subcategories`,{name});
+  // Create category mutation
+  const {
+    mutate: createCategory,
+    isLoading: isCreatingCategory,
+    isError: createCategoryIsError,
+    error: createCategoryError
+  } = useMutation({
+    mutationFn: async (newCategory) => {
+      // accept variables passed to mutate()
+      return await api.post('/categories', newCategory)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["categories"]);
-      setSubCategory("")
-      setParentCategoryId("")
+      queryClient.invalidateQueries(['categories'])
+      setCategory('')
     }
   })
 
-  const handleCategory = async (e) =>  {
+  // Create subcategory mutation
+  const {
+    mutate: createSubCategory,
+    isLoading: isCreatingSub,
+    isError: createSubIsError,
+    error: createSubError
+  } = useMutation({
+    mutationFn: async ({ parentId, name }) => {
+      return await api.post(`/categories/${parentId}/subcategories`, { name })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['categories'])
+      setSubCategory('')
+      setParentCategoryId('')
+    }
+  })
+
+  const handleCategory = (e) => {
     e.preventDefault()
-    if(!category.trim()) return;
-    createCategory({name:category.trim()});
+    if (!category.trim()) return
+    createCategory({ name: category.trim() })
+  }
 
-  };
-
-
-  const handleSubCategory = async (e) =>  {
+  const handleSubCategory = (e) => {
     e.preventDefault()
-    if(!parentCategoryId) return alert('Please select a parent category')
-    if(!subCategory.trim()) return; 
-    createSubCategory({parentId: parentCategoryId,name: subCategory.trim()});
+    if (!parentCategoryId) return alert('Please select a parent category')
+    if (!subCategory.trim()) return
+    createSubCategory({ parentId: parentCategoryId, name: subCategory.trim() })
+  }
 
-  };
   return (
-    <div>
-      <div>
-        <div>
-         <form onSubmit={handleCategory}>
-         <fieldset>
-          <legend>Category</legend>
-           <label>Create Category</label><br/>
-           <input type="text" value={category} onChange={(e)=>setCategory(e.target.value)} /><br/>
-           {}
-            <button type='submit'>{isPending ? "Creating..." : "Create Category"}</button>
-            {isError && <p> Error : {error?.message || " Error creating a new category "}</p>}
-         </fieldset>
-         </form>
+    <div className="p-4">
+      <div className="mb-6">
+        <form onSubmit={handleCategory}>
+          <fieldset>
+            <legend>Category</legend>
+            <label htmlFor="category-input">Create Category</label>
+            <br />
+            <input
+              id="category-input"
+              type="text"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="e.g. Electronics"
+            />
+            <br />
+            <button type="submit" disabled={isCreatingCategory}>
+              {isCreatingCategory ? 'Creating...' : 'Create Category'}
+            </button>
+            {createCategoryIsError && (
+              <p>Error: {createCategoryError?.message || 'Error creating category'}</p>
+            )}
+          </fieldset>
+        </form>
+      </div>
 
+      <div>
         <form onSubmit={handleSubCategory}>
-            <fieldset>
-              <legend>Sub Category </legend>
-              <select value=>
+          <fieldset>
+            <legend>Sub Category</legend>
+            <select
+              value={parentCategoryId}
+              onChange={(e) => setParentCategoryId(e.target.value)}
+            >
               <option value="">Select Category</option>
-              {categories?.map((c)=>{<option key={c._id} value={c._id}>{c.name}</option>})}
-            </select><br/>
-           <input type="text" value={subCategory} onChange={(e)=>setSubCategory(e.target.value)} />
-           {}
-            <button type='submit'>{isPending ? "Creating..." : "Create Sub Category"}</button>
-            {isError && <p> Error : {error?.message || " Error creating a new category "}</p>}
-            </fieldset>
-         </form>
-        </div>
+              {categories.map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <br />
+            <input
+              type="text"
+              value={subCategory}
+              onChange={(e) => setSubCategory(e.target.value)}
+              placeholder="e.g. Mobile Phones"
+            />
+            <br />
+            <button type="submit" disabled={isCreatingSub}>
+              {isCreatingSub ? 'Creating...' : 'Create Sub Category'}
+            </button>
+            {createSubIsError && (
+              <p>Error: {createSubError?.message || 'Error creating subcategory'}</p>
+            )}
+          </fieldset>
+        </form>
       </div>
     </div>
   )
 }
-
-export default Categories
