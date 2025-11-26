@@ -48,6 +48,14 @@ const authSlice = createSlice({
                 return null;
             }
         })(),
+        extraDetails:(()=>{
+            const stored = localStorage.getItem("extraDetails");
+            try {
+                return stored  && stored !== "undefined" ? JSON.parse(stored): null;
+            } catch (error) {
+                return null;
+            }
+        })(),
         accessToken:localStorage.getItem("accessToken") || null,
         refreshToken: localStorage.getItem("refreshToken") || null,
         loading : false, 
@@ -62,10 +70,12 @@ const authSlice = createSlice({
             state.accessToken = null;
             state.refreshToken = null;
             state.isAuthenicated = false;
+            state.extraDetails = null;
 
             localStorage.removeItem("user");
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+            localStorage.removeItem("extraDetails")
         }
     },
         extraReducers: (builder) => {
@@ -81,13 +91,16 @@ const authSlice = createSlice({
                 const user = action.payload.data.user;
                 const accessToken = action.payload.data.accessToken;
                 const refreshToken = action.payload.data.accessToken;
+                const extraDetails = action.payload.data.extraDetails;
 
                 state.user = user;
                 state.accessToken = accessToken;
                 state.refreshToken = refreshToken;
                 state.isAuthenicated = true;
+                state.extraDetails = extraDetails;
 
                 localStorage.setItem("user",JSON.stringify(user));
+                localStorage.setItem("extraDetails",JSON.stringify(extraDetails));
                 localStorage.setItem("accessToken",accessToken);
                 localStorage.setItem("refreshtoken",refreshToken);
             })
@@ -108,10 +121,12 @@ const authSlice = createSlice({
                         state.accessToken = null;
                         state.refreshToken = null;
                         state.isAuthenicated = false;
+                        state.extraDetails = null;
 
                         localStorage.removeItem("user");
                         localStorage.removeItem("accessToken");
                         localStorage.removeItem("refreshToken");
+                        localStorage.removeItem("extraDetails")
                     })
         }
 
