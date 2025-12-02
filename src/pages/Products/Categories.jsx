@@ -14,7 +14,7 @@ export default function Categories() {
     queryKey: ['categories'],
     queryFn: async () => {
       const res = await api.get('/categories')
-      return res.data
+      return res.data.data
     }
   })
 

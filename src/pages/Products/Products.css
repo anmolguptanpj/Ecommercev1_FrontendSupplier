@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+
 #Pr_header{
 display:flex;
 flex-direction: column;

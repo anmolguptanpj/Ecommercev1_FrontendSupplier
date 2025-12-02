@@ -15,23 +15,24 @@ function CreateProducts() {
     category: "",
     subCategory: "",
     unit: "",
-    images: []
+    images: [],
+    mrp: ""
   });
 
   const { data: brands } = useQuery({
     queryKey: ["brands"],
-    queryFn: async () => (await api.get("/brands")).data
+    queryFn: async () => (await api.get("/brands")).data.data
   });
 
   const { data: categories } = useQuery({
     queryKey: ["categories"],
-    queryFn: async () => (await api.get("/categories")).data
+    queryFn: async () => (await api.get("/categories")).data.data
   });
 
   const { data: subCategories } = useQuery({
     queryKey: ["subCategories", form.category],
     enabled: !!form.category,
-    queryFn: async () => (await api.get(`/subcategories/${form.category}`)).data
+    queryFn: async () => (await api.get(`/categories/${form.category}/subcategories`)).data.data
   });
 
   const handleChange = (e) => {
@@ -39,13 +40,16 @@ function CreateProducts() {
   };
 
   const handleImages = (e) => {
-    setForm({ ...form, images: Array.from(e.target.files) });
+   const files = Array.from(e.target.files);
+   setForm(prev=>({
+    ...prev,images:[...prev.images,...files]
+   }))
   };
 
   const createProductMutation = useMutation({
     mutationFn: async () => {
       const data = new FormData();
-
+console.log(typeof data)
       // Attach supplierId automatically
       const supplier = extra?._id
       data.append("supplier", supplier);
@@ -70,6 +74,7 @@ function CreateProducts() {
         category: "",
         subCategory: "",
         unit: "",
+        mrp:"",
         images: []
       });
     }
@@ -79,6 +84,9 @@ function CreateProducts() {
     e.preventDefault();
     createProductMutation.mutate();
   };
+
+  console.log(form.images)
+  
 
   return (
     <form onSubmit={handleSubmit} style={{ padding: 20 }}>
@@ -91,6 +99,10 @@ function CreateProducts() {
       {/* Price */}
       <label>Sales Price</label><br />
       <input type='number' name='salesPrice' value={form.salesPrice} onChange={handleChange} /><br /><br />
+
+      {/* Price */}
+      <label>MRP</label><br />
+      <input type='number' name='mrp' value={form.mrp} onChange={handleChange} /><br /><br />
 
       {/* Unit */}
       <label>Unit</label><br />
@@ -122,6 +134,9 @@ function CreateProducts() {
           <option key={sc._id} value={sc._id}>{sc.name}</option>
         ))}
       </select><br /><br />
+
+
+
 
       {/* Images */}
       <label>Product Images</label><br />

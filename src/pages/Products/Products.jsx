@@ -23,8 +23,8 @@ function Products() {
         style={{display:"flex",flexDirection:"column",justifyContent:"center",textAlign:'center',backgroundColor:''}}
         navStyle={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}
         links={[
-          {path:"/products/add",label:"CreateProducts"},
-          {path:"/products/:id",label:"Manage Products"},
+          {path:"/products/add",label:"Create Products"},
+          {path:"/products/",label:"View Products"},
 
       ]}
 />
