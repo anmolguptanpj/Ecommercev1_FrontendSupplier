@@ -258,7 +258,7 @@ console.log(form)
                             <div>
                                     <label>Discount %</label>
                                     <div>
-                                        <input name='mrp' placeholder='Write your Product MRP' className='border-2' value={form.discount} onChange={handleChange}/>
+                                        <input name='discount' placeholder='Write your Product MRP' className='border-2' value={form.discount} onChange={handleChange}/>
                                     </div>
                             </div>
                     
