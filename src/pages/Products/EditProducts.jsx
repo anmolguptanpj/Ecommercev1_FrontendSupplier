@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import api from '../../api'
 import { useQuery } from '@tanstack/react-query'
 
 function EditProducts() {
     const[edit,setEdit] = useState(false);
-
+    const navigate = useNavigate()
     const{id} = useParams()
 
 const fetchProduct = async() => {
@@ -29,7 +29,8 @@ const fetchProduct = async() => {
   return (
     <div className='flex   w-full h-full '>
 
-        <div className='w-full h-15 px-4'>
+        { edit=== false  ? 
+           ( <div className='w-full h-15 px-4'>
             <div className='w-full h-15 rounded-2xl bg-rose-400 items-center flex justify-center items text-3xl font-bold py-6'>Product Details</div>
          <div className='flex flex-col gap-2 py-3  w-full justify-center'>
                <div className='flex  gap-3 '>
@@ -115,11 +116,28 @@ const fetchProduct = async() => {
           
          </div>
             
+           <div className='w-full h-10 '>
+            <div className='pr-20 flex justify-center gap-10 '>
+                <button onClick={()=>setEdit(true)} className='px-4 py-1 rounded-xl bg-blue-500'>Edit</button> 
+           <button onClick={()=>navigate("/products")} className='px-4 py-1 rounded-xl bg-green-500 ' >Back</button>
+            </div>
+           </div>
             
             
             
-            
-        </div>
+        </div>) : (
+        
+            <div>
+               <div> <button
+                className='px-4 py-1 rounded-xl bg-green-500 '
+                onClick={()=>{
+                setEdit(false);
+                console.log(edit)
+                }}> Back</button>  </div>
+            </div>
+        
+        )
+        }
          
     </div>
   )
