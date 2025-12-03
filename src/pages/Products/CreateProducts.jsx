@@ -10,7 +10,7 @@ function CreateProducts() {
 
   const [form, setForm] = useState({
     name: "",
-    salesPrice: "",
+    discount: "",
     brand: "",
     category: "",
     subCategory: "",
@@ -69,7 +69,7 @@ console.log(typeof data)
       queryClient.invalidateQueries(["products"]);
       setForm({
         name: "",
-        salesPrice: "",
+        discount: "",
         brand: "",
         category: "",
         subCategory: "",
@@ -97,8 +97,8 @@ console.log(typeof data)
       <input type='text' name='name' value={form.name} onChange={handleChange} /><br /><br />
 
       {/* Price */}
-      <label>Sales Price</label><br />
-      <input type='number' name='salesPrice' value={form.salesPrice} onChange={handleChange} /><br /><br />
+      <label>Discount %</label><br />
+      <input type='number' name='discount' value={form.discount} onChange={handleChange} /><br /><br />
 
       {/* Price */}
       <label>MRP</label><br />

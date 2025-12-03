@@ -4,12 +4,12 @@ import ProductList from './ProductList'
 import ProductHeader from './ProductHeader'
 import { Outlet } from 'react-router-dom'
 import { Routes,Route } from 'react-router-dom'
-import ProductDetails from './ProductDetails'
 import './Products.css'
 import CreateProducts from './CreateProducts'
 import Brands from './Brands'
 import Categories from './Categories'
 import Insideheader from '../../components/Insideheader'
+import EditProducts from './EditProducts'
 
 function Products() {
    const ProductOnlyRoute = ()=>(
@@ -95,7 +95,7 @@ function Products() {
      <Route element={<ProductOnlyRoute/>}>
       <Route path="/" element={<ProductList/>} />
       <Route path="/add" element={<CreateProducts/>} />
-      <Route path="/:id" element={<ProductDetails />} />
+      <Route path="/:id" element={<EditProducts />} />
      </Route>
     </Routes>
   )
