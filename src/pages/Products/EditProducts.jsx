@@ -160,8 +160,8 @@ export default function EditProductsRHFZodViewEdit() {
           ? Object.entries(product.description.minimalInformation).map(([k, v]) => ({ key: k, value: String(v) }))
           : [{ key: "", value: "" }],
       specification:
-        product.description?.productSpecification && Object.keys(product.description.productSpecification).length > 0
-          ? Object.entries(product.description.productSpecification).map(([category, fields]) => ({
+        product.description?.productSpecifications && Object.keys(product.description.productSpecifications).length > 0
+          ? Object.entries(product.description.productSpecifications).map(([category, fields]) => ({
               category,
               subFields: Object.entries(fields ?? {}).map(([subField, details]) => ({
                 subField,
@@ -169,7 +169,7 @@ export default function EditProductsRHFZodViewEdit() {
               })),
             }))
           : [{ category: "", subFields: [{ subField: "", details: "" }] }],
-      whatsInTheBox: product.description?.whatsInThebox?.length ? product.description.whatsInThebox : [""],
+      whatsInTheBox: product.description?.whatsInTheBox?.length ? product.description.whatsInTheBox : [""],
       aboutThisItem: product.description?.aboutThisItem?.length ? product.description.aboutThisItem : [""],
     };
 
@@ -245,8 +245,8 @@ export default function EditProductsRHFZodViewEdit() {
         description: {
           brief: values.brief || "",
           minimalInformation: {},
-          productSpecification: {},
-          whatsInThebox: (values.whatsInTheBox || []).filter(Boolean),
+          productSpecifications: {},
+          whatsInTheBox: (values.whatsInTheBox || []).filter(Boolean),
           aboutThisItem: (values.aboutThisItem || []).filter(Boolean),
         },
       };
@@ -256,7 +256,7 @@ export default function EditProductsRHFZodViewEdit() {
         if (k) payload.description.minimalInformation[k] = r.value || "";
       });
 
-      payload.description.productSpecification = buildProductSpecification(values.specification);
+      payload.description.productSpecifications = buildProductSpecification(values.specification);
 
       const formData = new FormData();
 
@@ -494,8 +494,8 @@ export default function EditProductsRHFZodViewEdit() {
         <div className="mb-4 border p-3 rounded">
           <label className="block font-semibold mb-2">What's In The Box</label>
           <div>
-            {(product?.description?.whatsInThebox || []).length
-              ? product.description.whatsInThebox.map((it, i) => (<div key={i} className="py-1">- {it}</div>))
+            {(product?.description?.whatsInTheBox || []).length
+              ? product.description.whatsInTheBox.map((it, i) => (<div key={i} className="py-1">- {it}</div>))
               : <div className="text-gray-500">No items</div>}
           </div>
         </div>
@@ -511,7 +511,7 @@ export default function EditProductsRHFZodViewEdit() {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(product?.description?.productSpecification || {}).map(([section, fields]) => Object.entries(fields).map(([subField, details]) => (
+              {Object.entries(product?.description?.productSpecifications || {}).map(([section, fields]) => Object.entries(fields).map(([subField, details]) => (
                 <tr key={section + subField}><td className="border px-2">{section}</td><td className="border px-2">{subField}</td><td className="border px-2">{details}</td></tr>
               )))}
             </tbody>
@@ -735,13 +735,13 @@ export default function EditProductsRHFZodViewEdit() {
                           ? Object.entries(product.description.minimalInformation).map(([k, v]) => ({ key: k, value: String(v) }))
                           : [{ key: "", value: "" }],
                       specification:
-                        product.description?.productSpecification && Object.keys(product.description.productSpecification).length > 0
-                          ? Object.entries(product.description.productSpecification).map(([category, fields]) => ({
+                        product.description?.productSpecifications && Object.keys(product.description.productSpecifications).length > 0
+                          ? Object.entries(product.description.productSpecifications).map(([category, fields]) => ({
                               category,
                               subFields: Object.entries(fields ?? {}).map(([subField, details]) => ({ subField, details: String(details ?? "") })),
                             }))
                           : [{ category: "", subFields: [{ subField: "", details: "" }] }],
-                      whatsInTheBox: product.description?.whatsInThebox?.length ? product.description.whatsInThebox : [""],
+                      whatsInTheBox: product.description?.whatsInTheBox?.length ? product.description.whatsInTheBox : [""],
                       aboutThisItem: product.description?.aboutThisItem?.length ? product.description.aboutThisItem : [""],
                     };
                     reset(dv);
