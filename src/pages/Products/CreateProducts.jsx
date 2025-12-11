@@ -62,7 +62,7 @@ console.log(typeof data)
         }
       });
 
-      return api.post("/products", data);
+      return api.post("/products/create", data);
     },
 
     onSuccess: () => {
