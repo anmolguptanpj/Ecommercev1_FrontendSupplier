@@ -42,6 +42,7 @@ function Products() {
       <div id="Pr_header"><ProductHeader/></div>
         <div style={{textAlign:"",justifyContent:""}}>
         <div id = "productInsideHeader"><Insideheader
+        className=''
         headerTitle='Brands'
         headerStyle={{}}
         style={{display:"flex",flexDirection:"column",justifyContent:"center",textAlign:'center'}}

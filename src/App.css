@@ -13,18 +13,16 @@
 #header{
      height: 10vh;
      width: 100vw;
-     background-color:#c4437f;
 }
 
 #body{
      height: 90vh;
      display: flex;
      width: 100vw;
+     margin:0;
 }
 
 
 #sidebar{
-width:20vw;
-text-align: center;
-background-color: #9C95DC;
+width:25vw;
 }
