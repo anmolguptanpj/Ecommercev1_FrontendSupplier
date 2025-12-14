@@ -39,7 +39,7 @@ function Login() {
         <p className='font-bold'>Welcome to login page</p>
       </div>
 
-      <form className='flex flex-col ' onSubmit={handleSubmit}>
+      <form className='flex flex-col gap-3 ' onSubmit={handleSubmit}>
         <input
         className='border-3 w-100 p-1'
           type='email'
@@ -50,7 +50,7 @@ function Login() {
         />
         <br />
 
-       <div className='flex flex-col gap-2'>
+       <div className='flex flex-col g'>
          <input
            className='border-3 w-100 p-1'
           type={show ? "text" : "password"}
