@@ -41,7 +41,7 @@ function Login() {
 
       <form className='flex flex-col gap-3 ' onSubmit={handleSubmit}>
         <input
-        className='border-3 w-100 p-1'
+        className='border-3 w-100 p-1 focus:outline-none'
           type='email'
           placeholder="Enter Email"
           value={email}
@@ -52,7 +52,7 @@ function Login() {
 
        <div className='flex flex-col g'>
          <input
-           className='border-3 w-100 p-1'
+           className='border-3 w-100 p-1 focus:outline-none'
           type={show ? "text" : "password"}
           placeholder='Enter Password'
           value={password}
