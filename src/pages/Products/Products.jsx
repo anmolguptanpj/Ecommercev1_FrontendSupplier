@@ -20,6 +20,10 @@ function Products() {
         <div id = "productInsideHeader"><Insideheader
         headerTitle='Products'
         headerStyle={{}}
+        headerClass='text-2xl font-bold'
+        className='bg-red-800'
+        navClass=''
+        linkclass='hover:underline'
         style={{display:"flex",flexDirection:"column",justifyContent:"center",textAlign:'center',backgroundColor:''}}
         navStyle={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}
         links={[
@@ -42,7 +46,9 @@ function Products() {
       <div id="Pr_header"><ProductHeader/></div>
         <div style={{textAlign:"",justifyContent:""}}>
         <div id = "productInsideHeader"><Insideheader
-        className=''
+        className='bg-red-800'
+        headerClass='text-3xl'
+        navClass=''
         headerTitle='Brands'
         headerStyle={{}}
         style={{display:"flex",flexDirection:"column",justifyContent:"center",textAlign:'center'}}
@@ -65,6 +71,8 @@ function Products() {
         <div style={{textAlign:"",justifyContent:""}}>
         <div id = "productInsideHeader"><Insideheader
         headerTitle='Category'
+        className='bg-red-800'
+        headerClass='text-3xl'
         headerStyle={{}}
         style={{display:"flex",flexDirection:"column",justifyContent:"center",textAlign:'center'}}
         navStyle={{display:"flex",flexDirection:"row",justifyContent:"space-around"}}

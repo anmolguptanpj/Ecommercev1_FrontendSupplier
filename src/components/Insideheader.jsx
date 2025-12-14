@@ -7,17 +7,19 @@ function Insideheader({
   style = {},
   navStyle = {},
   headerTitle = "",
+  headerClass="",
+  linkclass="",
   links = [
   ],
   headerStyle={}
 }) {
   return (
-    <div className={className} style={style}>
-      <h2 style={{headerStyle}}>{headerTitle}</h2>
+    <div className={`${className} h-15`} style={style}>
+      <h2 className={headerClass} style={{headerStyle}}>{headerTitle}</h2>
 
       <nav className={navClass} style={navStyle}>
         {links.map((l, index) => (
-          <Link key={index} to={l.path}>
+          <Link className={linkclass} key={index} to={l.path}>
             {l.label}
           </Link>
         ))}

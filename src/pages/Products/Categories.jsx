@@ -4,6 +4,10 @@ import api from '../../api'
 
 export default function Categories() {
   const queryClient = useQueryClient()
+  const inputS=""
+  const select=""
+  const labels=""
+  const buttonS=""
 
   const [category, setCategory] = useState('')
   const [subCategory, setSubCategory] = useState('')
@@ -66,7 +70,7 @@ export default function Categories() {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-full flex-col flex items-center">
       <div className="mb-6">
         <form onSubmit={handleCategory}>
           <fieldset>

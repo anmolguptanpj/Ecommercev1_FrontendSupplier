@@ -2,11 +2,18 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react'
 import { useExtraDetails } from '../../hooks/useExtraDetails';
 import api from '../../api';
+import { Link, useNavigate } from 'react-router-dom';
 
 function CreateProducts() {
 
   const extra = useExtraDetails(); 
   const queryClient = useQueryClient();
+  const input = "border-b-2 w-100 focus:outline-none"
+  const select = "border-b-2 w-100 "
+  const label = " font-bold"
+  const optionS="bg-blue-950 w-50 text-white"
+  const navigate = useNavigate()
+  const buttonS = "px-1 hover:bg-sky-900 w-30 rounded-xl cursor-pointer text-center"
 
   const [form, setForm] = useState({
     name: "",
@@ -89,63 +96,80 @@ console.log(typeof data)
   
 
   return (
-    <form onSubmit={handleSubmit} style={{ padding: 20 }}>
-      <h2>Create Product</h2>
+  <div className='flex justify-center w-full h-full '>
+      <form className='w-full border ' onSubmit={handleSubmit} style={{ padding: 20 }}>
+     <div className='w-full border-y-4'>
+       <h2 className='text-center'>Create Product</h2>
+     </div>
 
-      {/* Name */}
-      <label>Name</label><br />
-      <input type='text' name='name' value={form.name} onChange={handleChange} /><br /><br />
+   <div className='w-[80%] flex justify-center items-center'>
+     <div className='flex flex-col w-35'>
+        {/* Name */}
+      <label className={label}>Name</label> 
+      <input className={input} type='text' name='name' value={form.name} onChange={handleChange} />  
 
       {/* Price */}
-      <label>Discount %</label><br />
-      <input type='number' name='discount' value={form.discount} onChange={handleChange} /><br /><br />
+      <label className={label} >Discount %</label> 
+      <input className={input} type='number' pattern='[0-9]'  name='discount' value={form.discount} onChange={handleChange} />  
 
       {/* Price */}
-      <label>MRP</label><br />
-      <input type='number' name='mrp' value={form.mrp} onChange={handleChange} /><br /><br />
+      <label className={label}>MRP</label> 
+      <input className={input} type='number' inputMode='numeric' name='mrp' pattern="[0-9]*" value={form.mrp} onChange={handleChange} />  
+
+        {/* Price */}
+      <label className={label}>Sales</label> 
+      <input className={input}  value={form.mrp*((100-form.discount)/100)} onChange={handleChange} />  
 
       {/* Unit */}
-      <label>Unit</label><br />
-      <input type='text' name='unit' value={form.unit} onChange={handleChange} /><br /><br />
+      <label className={label}>Unit</label> 
+      <input className={input} type='text' name='unit' value={form.unit} onChange={handleChange} />  
 
       {/* Brand */}
-      <label>Brand</label><br />
-      <select name='brand' value={form.brand} onChange={handleChange}>
-        <option value="">Select Brand</option>
+      <label className={label}>Brand</label> 
+      <select className={select} name='brand' value={form.brand} onChange={handleChange}>
+        <option className={optionS} value="">Select Brand</option>
         {brands?.map(b => (
-          <option key={b._id} value={b._id}>{b.name}</option>
+          <option className={optionS} key={b._id} value={b._id}>{b.name}</option>
         ))}
-      </select><br /><br />
+      </select>  
 
       {/* Category */}
-      <label>Category</label><br />
-      <select name='category' value={form.category} onChange={handleChange}>
-        <option value="">Select Category</option>
+      <label className={label}>Category</label> 
+      <select className={select} name='category' value={form.category} onChange={handleChange}>
+        <option className={optionS} value="">Select Category</option>
         {categories?.map(c => (
-          <option key={c._id} value={c._id}>{c.name}</option>
+          <option className={optionS} key={c._id} value={c._id}>{c.name}</option>
         ))}
-      </select><br /><br />
+      </select>  
 
       {/* Subcategory */}
-      <label>Subcategory</label><br />
-      <select name='subCategory' value={form.subCategory} onChange={handleChange}>
-        <option value="">Select Sub Category</option>
+      <label className={label}>Subcategory</label> 
+      <select  className={select} name='subCategory' value={form.subCategory} onChange={handleChange}>
+        <option className={optionS} value="">Select Sub Category</option>
         {subCategories?.map(sc => (
-          <option key={sc._id} value={sc._id}>{sc.name}</option>
+          <option className={optionS} key={sc._id} value={sc._id}>{sc.name}</option>
         ))}
-      </select><br /><br />
+      </select>  
 
 
 
 
       {/* Images */}
-      <label>Product Images</label><br />
-      <input type='file' multiple accept='image/*' onChange={handleImages} /><br /><br />
+      <label  className={label}>Product Images</label> 
+      <input className={input} type='file' multiple accept='image/*' onChange={handleImages} />  
+    </div>
+   </div>
 
-      <button type='submit'>
+    <div className=' mt-2 flex border-y-4 w-full justify-center gap-5 py-2'>
+        <button className={`${buttonS} bg-green-500` } type='submit'>
         {createProductMutation.isPending ? "Creating..." : "Create Product"}
       </button>
+      <Link className={`${buttonS} bg-blue-500`} to={"/products"}>
+       Back
+      </Link>
+    </div>
     </form>
+  </div>
   )
 }
 

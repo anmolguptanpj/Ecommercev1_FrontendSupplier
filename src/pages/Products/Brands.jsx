@@ -32,7 +32,7 @@ function Brands() {
   return (
     <div>
       <div>
-        <div></div>
+        <div> </div>
         <div>
           <form onSubmit={handleBrand}>
             <input type='text' value={brand} onChange={(e)=>setBrand(e.target.value)}/>
