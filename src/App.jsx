@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Orders from './pages/Orders'
+import Orders from './pages/Orders/Orders'
 import Payments from './pages/Payments'
 import Sales from './pages/Sales'
 import Return from './pages/Return'
@@ -22,8 +22,8 @@ function App() {
     <div id='main'>
       <div id = 'header'><Header/></div>
       <div id = 'body'>
-        <div className=' bg-yellow-500 shadow-2xl' id = "sidebar"><Sidebar/></div>
-        <div className='bg-blue-950 h-full w-full' id = 'outlet1'><Outlet/></div>
+        <div className=' bg-blue-300 shadow-2xl' id = "sidebar"><Sidebar/></div>
+        <div className='bg-blue-700 h-full w-full' id = 'outlet1'><Outlet/></div>
       </div>
     </div>
   )
@@ -42,7 +42,6 @@ function App() {
     <Route path='/' element={<Login/>}/>
     <Route element={<PublicLayout/>}>
     <Route path='/home' element={<Home/>}/>
-    <Route path='/orders' element={<Orders/>}/>
     <Route path='/payments' element={<Payments/>}/>
     <Route path='/sales' element={<Sales/>}/>
     <Route path='/returns' element={<Return/>}/>
@@ -50,6 +49,7 @@ function App() {
     <Route path="/staff" element={<Staff/>}/>
     <Route path="/profile" element={<Profile/>}/>
     <Route path="/products/*" element={<Products/>}/>
+    <Route path="/orders/*" element={<Orders/>}/>
     </Route>
 
     <Route element= {<SecLayout/>} >
