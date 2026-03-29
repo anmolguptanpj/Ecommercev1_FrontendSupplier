@@ -28,7 +28,7 @@ function ProductList() {
   if(isLoading) return <p>Loading Products....</p>
   if(isError) return <p>Fetching products failed</p>
 
-  const products = data?.data
+  const products = data?.data || []
 
   
 
