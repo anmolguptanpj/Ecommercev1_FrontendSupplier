@@ -18,6 +18,7 @@ function OrdersAll() {
   console.log(extra)
 
   const id = extra?._id
+  
 
   console.log(id)
 
@@ -73,7 +74,8 @@ function OrdersAll() {
         </table>
       </div>
         
-      {orderId && orderOpen && <OrderView/>}
+      {orderId && orderOpen && <OrderView _id={orderId}
+      onClose={()=>setOrderOpen(True)}/>}
       
     </div>
   )
