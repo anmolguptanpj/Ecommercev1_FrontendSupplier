@@ -10,7 +10,7 @@ import OrderView from '../../../modals/OrderView'
 function OrdersAll() {
 
   const [orderId,setOrderId]=useState("")
-  const [orderOpen,setOrderOpen] = useState(true)
+  const [orderOpen,setOrderOpen] = useState(false)
   const navigate = useNavigate()
   const extra = useExtraDetails()
   const tables = " "
@@ -75,7 +75,7 @@ function OrdersAll() {
       </div>
         
       {orderId && orderOpen && <OrderView _id={orderId}
-      onClose={()=>setOrderOpen(True)}/>}
+      onClose={()=>setOrderOpen(false)}/>}
       
     </div>
   )

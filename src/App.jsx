@@ -15,6 +15,7 @@ import Products from './pages/Products/Products'
 import Staff from './pages/Staff'
 import './App.css'
 import AddProducts from './pages/Products/CreateProducts'
+import Inventory from './pages/Inventory'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
     <Route path="/profile" element={<Profile/>}/>
     <Route path="/products/*" element={<Products/>}/>
     <Route path="/orders/*" element={<Orders/>}/>
+    <Route path='/inventory' element = {<Inventory/>}/>
     </Route>
 
     <Route element= {<SecLayout/>} >
