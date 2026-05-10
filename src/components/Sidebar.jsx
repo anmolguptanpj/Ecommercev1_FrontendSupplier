@@ -19,8 +19,7 @@ function Sidebar() {
         <Link className={links} to='/staff'>Staff</Link>
         <Link className={links} to='/products'>Products</Link>
         <Link className={links} to='/inventory'>Inventory</Link>
-        
-
+      
       </div>
     </div>
   )

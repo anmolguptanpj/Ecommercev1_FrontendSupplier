@@ -14,7 +14,7 @@ function OrderView({_id,onClose}) {
   console.log(supplierId)
 
   const getOrder = async () => {
-    const res = await api.get(`/${supplierId}/${_id}`)
+    const res = await api.get(`/order/${supplierId}/${_id}`)
     return res.data
   }
 
