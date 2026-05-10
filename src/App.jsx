@@ -23,8 +23,8 @@ function App() {
     <div id='main'>
       <div id = 'header'><Header/></div>
       <div id = 'body'>
-        <div className=' bg-blue-300 shadow-2xl' id = "sidebar"><Sidebar/></div>
-        <div className='bg-blue-700 h-full w-full' id = 'outlet1'><Outlet/></div>
+        <div className=' bg-yellow-300 shadow-2xl' id = "sidebar"><Sidebar/></div>
+        <div className='bg-blue-900 h-full w-full' id = 'outlet1'><Outlet/></div>
       </div>
     </div>
   )
