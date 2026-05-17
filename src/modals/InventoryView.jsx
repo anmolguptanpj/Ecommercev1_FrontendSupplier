@@ -116,7 +116,9 @@ function InventoryView({ _id, onClose }) {
                     <th className="px-4 py-4 font-medium">Type</th>
                     <th className="px-4 py-4 font-medium">Opening</th>
                     <th className="px-4 py-4 font-medium">Receipt</th>
+                    <th className="px-4 py-4 font-medium">Unit Cost</th>
                     <th className="px-4 py-4 font-medium">Sold</th>
+                    <th className="px-4 py-4 font-medium">Unit Sales</th>
                     <th className="px-4 py-4 font-medium">Locked</th>
                     <th className="px-4 py-4 font-medium">Lost</th>
                     <th className="px-4 py-4 font-medium">Available</th>
@@ -149,8 +151,9 @@ function InventoryView({ _id, onClose }) {
                       <td className="px-4 py-4">{item.opening_Qty}</td>
 
                        <td className="px-4 py-4">{item.receipt_Qty}</td>
-
+                       <td className="px-4 py-4">{item.unit_cost_price}</td>
                        <td className="px-4 py-4">{item.sold_Qty}</td>
+                         <td className="px-4 py-4">{item.unit_selling_price}</td>
                        <td className="px-4 py-4">{item.locked_Qty}</td>
                        <td className="px-4 py-4">{item.lost_Qty}</td>
 

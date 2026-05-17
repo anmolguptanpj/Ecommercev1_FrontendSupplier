@@ -10,8 +10,8 @@ const navLinks = [
   { to: '/returns',   label: 'Returns',   icon: '↩️'  },
   { to: '/sales',     label: 'Sales',     icon: '📈' },
   { to: '/staff',     label: 'Staff',     icon: '🧑‍💼' },
-  {to: '/home',       label: 'Home',      icon: '🏠'  },
-  {to: '/dashboard',  label: 'Dashboard',     icon: '📊'  }
+  {to:  '/home',       label: 'Home',      icon: '🏠'  },
+  {to:  '/dashboard',  label: 'Dashboard', icon: '📊'  }
  
  
 ];
