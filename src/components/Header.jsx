@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const navLinks = [
-  { to: '/dashboard', label: 'Dashboard' },
-  { to: '/home',      label: 'Home'      },
+  {  },
+  {     },
 ];
 
 export default function Header() {

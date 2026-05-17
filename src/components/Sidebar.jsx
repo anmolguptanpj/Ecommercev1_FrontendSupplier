@@ -3,13 +3,17 @@ import { Link, useLocation } from 'react-router-dom';
 
 const navLinks = [
   { to: '/orders',    label: 'Orders',    icon: '📦' },
+  { to: '/inventory', label: 'Inventory', icon: '🗃️'  },
+  { to: '/products',  label: 'Products',  icon: '🛍️'  },
   { to: '/payments',  label: 'Payments',  icon: '💳' },
   { to: '/customer',  label: 'Customers', icon: '👤' },
   { to: '/returns',   label: 'Returns',   icon: '↩️'  },
   { to: '/sales',     label: 'Sales',     icon: '📈' },
   { to: '/staff',     label: 'Staff',     icon: '🧑‍💼' },
-  { to: '/products',  label: 'Products',  icon: '🛍️'  },
-  { to: '/inventory', label: 'Inventory', icon: '🗃️'  },
+  {to: '/home',       label: 'Home',      icon: '🏠'  },
+  {to: '/dashboard',  label: 'Dashboard',     icon: '📊'  }
+ 
+ 
 ];
 
 export default function Sidebar() {

@@ -38,19 +38,21 @@ export default function Inventory() {
 
   const inventories = data?.data || [];
 
+  console.log(inventories[0])
+
   const cols = [
     { label: 'Product Code',          key: 'productCode',          align: 'left'  },
     { label: 'Product Name',           key: 'productName',          align: 'left'  },
     { label: 'Opening',                key: 'opening_Qty',          align: 'right' },
     { label: 'Receipt',                key: 'receipt_Qty',          align: 'right' },
-    { label: 'Receipt Cost',           key: 'total_receipt_cost',   align: 'right', currency: true },
+    { label: 'Receipt Cost',           key: 'total_cost',   align: 'right', currency: true },
     { label: 'Sales',                  key: 'sales_Qty',            align: 'right' },
-    { label: 'Revenue',                key: 'total_sales_cost',     align: 'right', currency: true },
+    { label: 'Revenue',                key: 'total_revenue',     align: 'right', currency: true },
     { label: 'Locked',                 key: 'locked_Qty',           align: 'right' },
     { label: 'Lost',                   key: 'lost_Qty',             align: 'right' },
-    { label: 'Lost Cost',              key: 'total_lost_cost',      align: 'right', currency: true },
-    { label: 'Available',              key: 'closing_Qty',          align: 'right' },
-    { label: 'Remaining Goods Value',  key: 'closing_stock_value',  align: 'right', currency: true },
+    { label: 'Profit/(- Loss)',        key: 'total_profit',             align: 'right' },
+    { label: 'Available',              key: 'available_Qty',          align: 'right' },
+    { label: 'Remaining Goods Value',  key: 'stock_value',  align: 'right', currency: true },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { useExtraDetails } from '../hooks/useExtraDetails'
 import { useQuery } from '@tanstack/react-query'
 import api from '../api'
 import ManageStock from './ManageStock'
+import Inventory from '../pages/Inventory'
 
 function InventoryView({ _id, onClose }) {
   const extra = useExtraDetails()
@@ -42,6 +43,8 @@ function InventoryView({ _id, onClose }) {
   const product = records?.productInfo
   const supplier = records?.supplierInfo
   const inventory = records?.cleanTransactions || []
+
+  console.log(inventory)
 
   const latest = inventory[0] || {}
 
@@ -109,18 +112,19 @@ function InventoryView({ _id, onClose }) {
               <table className="w-full text-sm">
                 <thead className="bg-gray-100 border-b border-gray-200">
                   <tr className="text-left">
+                     <th className="px-4 py-4 font-medium">Date</th>
                     <th className="px-4 py-4 font-medium">Type</th>
                     <th className="px-4 py-4 font-medium">Opening</th>
-                    <th className="px-4 py-4 font-medium">Available</th>
-                    <th className="px-4 py-4 font-medium">Locked</th>
-                    <th className="px-4 py-4 font-medium">Sold</th>
-                    <th className="px-4 py-4 font-medium">Lost</th>
                     <th className="px-4 py-4 font-medium">Receipt</th>
-                    <th className="px-4 py-4 font-medium">Cost</th>
+                    <th className="px-4 py-4 font-medium">Sold</th>
+                    <th className="px-4 py-4 font-medium">Locked</th>
+                    <th className="px-4 py-4 font-medium">Lost</th>
+                    <th className="px-4 py-4 font-medium">Available</th>
                     <th className="px-4 py-4 font-medium">Revenue</th>
+                    <th className="px-4 py-4 font-medium">Cost</th>
                     <th className="px-4 py-4 font-medium">Profit</th>
                     <th className="px-4 py-4 font-medium">Remarks</th>
-                    <th className="px-4 py-4 font-medium">Date</th>
+                   
                   </tr>
                 </thead>
 
@@ -130,6 +134,12 @@ function InventoryView({ _id, onClose }) {
                       key={index}
                       className="border-b border-gray-100 hover:bg-gray-50 transition"
                     >
+                           <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                        {item.createdAt
+                          ? new Date(item.createdAt).toLocaleDateString()
+                          : 'N/A'}
+                      </td>
+
                       <td className="px-4 py-4">
                         <span className="px-3 py-1 rounded-full text-xs bg-black text-white">
                           {item.type}
@@ -138,25 +148,31 @@ function InventoryView({ _id, onClose }) {
 
                       <td className="px-4 py-4">{item.opening_Qty}</td>
 
+                       <td className="px-4 py-4">{item.receipt_Qty}</td>
+
+                       <td className="px-4 py-4">{item.sold_Qty}</td>
+                       <td className="px-4 py-4">{item.locked_Qty}</td>
+                       <td className="px-4 py-4">{item.lost_Qty}</td>
+
                       <td className="px-4 py-4 font-medium">
                         {item.available_Qty}
                       </td>
 
-                      <td className="px-4 py-4">{item.locked_Qty}</td>
+                      
 
-                      <td className="px-4 py-4">{item.sold_Qty}</td>
+                      
+                      <td className="px-4 py-4">
+                        ₹{item.total_revenue}
+                      </td>
+                      
 
-                      <td className="px-4 py-4">{item.lost_Qty}</td>
-
-                      <td className="px-4 py-4">{item.receipt_Qty}</td>
+                     
 
                       <td className="px-4 py-4">
                         ₹{item.total_cost}
                       </td>
 
-                      <td className="px-4 py-4">
-                        ₹{item.total_revenue}
-                      </td>
+                     
 
                       <td className="px-4 py-4 font-semibold">
                         ₹{item.total_profit}
@@ -166,11 +182,7 @@ function InventoryView({ _id, onClose }) {
                         {item.remarks}
                       </td>
 
-                      <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
-                        {item.createdAt
-                          ? new Date(item.createdAt).toLocaleDateString()
-                          : 'N/A'}
-                      </td>
+                     
                     </tr>
                   ))}
 
