@@ -69,11 +69,12 @@ function App() {
     <Route path="/products/" element={<Products/>}/>
     <Route path="/orders/" element={<Orders/>}/>
     <Route path='/inventory' element = {<Inventory/>}/>
+     <Route path = '/dashboard' element={<Dashboard/>}/>
     </Route>
 
-    <Route element= {<SecLayout/>} >
-    <Route path = '/dashboard' element={<Dashboard/>}/>
-    </Route>
+  
+   
+    
   
   </Routes>
 </Router>
