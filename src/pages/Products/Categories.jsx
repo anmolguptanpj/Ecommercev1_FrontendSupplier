@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '../../api';
 
-export default function Categories() {
+export default function Categories({ onClose }) {
   const queryClient = useQueryClient();
 
   const [category, setCategory] = useState('');
@@ -65,18 +65,33 @@ export default function Categories() {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-50 text-black">
+    <div className="fixed w-full overflow-y-auto inset-0 bg-gray-50 text-black">
 
       {/* ── HEADER ── */}
-      <div className="sticky top-0 z-30 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+      <div className=" w-full flex justify-center items-center   bg-white border-b border-gray-200">
+      
+          <div className="w-[75%] mx-auto px-6 py-5">
           <h1 className="text-3xl font-semibold">Categories</h1>
           <p className="text-sm text-gray-500 mt-1">Create and manage categories and sub-categories</p>
+
+          
         </div>
+         
+       
+       <div className='w-[25%] flex justify-start items-center'>
+         <button
+            onClick={onClose}
+            type="button"
+            className="px-5  py-2.5 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+          >
+            Back
+          </button>
+       </div>
+      
       </div>
 
       {/* ── BODY ── */}
-      <div className="max-w-7xl mx-auto p-6 space-y-6">
+      <div className="max-w-7xl flex justify-evenly mx-auto p-6 space-y-6">
 
         {/* Create Category */}
         <div className="bg-white border border-gray-200 rounded-3xl p-6 max-w-lg">

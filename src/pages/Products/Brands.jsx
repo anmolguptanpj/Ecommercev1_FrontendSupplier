@@ -2,7 +2,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import api from '../../api';
 
-export default function Brands() {
+export default function Brands({onClose}) {
   const [brand, setBrand] = useState('');
 
   const queryClient = useQueryClient();
@@ -32,10 +32,19 @@ export default function Brands() {
     <div className="fixed inset-0 bg-gray-50 text-black">
 
       {/* ── HEADER ── */}
-      <div className="sticky top-0 z-30 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+      <div className="flex w-full justify-center items-center bg-white border-b border-gray-200">
+        <div className="w-[75%] mx-auto px-6 py-5">
           <h1 className="text-3xl font-semibold">Brands</h1>
           <p className="text-sm text-gray-500 mt-1">Create and manage product brands</p>
+        </div>
+        <div className='w-[25%]'>
+           <button
+            onClick={onClose}
+            type="button"
+            className="px-5  py-2.5 rounded-xl border border-gray-300 hover:bg-gray-100 "
+          >
+            Back
+          </button>
         </div>
       </div>
 

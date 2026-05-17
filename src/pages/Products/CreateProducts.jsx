@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 import { useExtraDetails } from '../../hooks/useExtraDetails'
 import api from '../../api'
 import { useNavigate } from 'react-router-dom'
+import Brands from './Brands'
+import Categories from './Categories'
 
 function CreateProducts({ onClose }) {
   const extra = useExtraDetails()
   const queryClient = useQueryClient()
   const navigate = useNavigate()
-
+  const[brandsOpen,setBrandsOpen]=useState(false)
+  const[categoryOpen,setCategoryOpen]=useState(false)
   const [form, setForm] = useState({
     name: '',
     discount: '',
@@ -108,12 +111,31 @@ function CreateProducts({ onClose }) {
           </p>
         </div>
 
+        {categoryOpen && <Categories onClose={()=>{setCategoryOpen(false)}}/>}
+        {brandsOpen && <Brands onClose={()=>{setBrandsOpen(false)}}/>}
+
+        <div className='flex gap-4'>
+          <button
+            onClick={() =>setCategoryOpen(true)}
+            className="px-5 py-2.5 rounded-xl bg-black text-white hover:opacity-90 "
+          >
+            Create Categories
+          </button>
+
+          <button
+            onClick={() =>setBrandsOpen(true)}
+            className="px-5 py-2.5 rounded-xl bg-black text-white hover:opacity-90 "
+          >
+            Create Brands
+          </button>
+
         <button
           onClick={onClose}
-          className="px-4 py-2 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+          className="px-5 py-2.5 rounded-xl border border-gray-300 hover:bg-gray-100 transition "
         >
           Back
         </button>
+        </div>
       </div>
 
       {/* Form */}

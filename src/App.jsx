@@ -66,7 +66,7 @@ function App() {
     <Route path="/customer" element={<Customer/>}/>
     <Route path="/staff" element={<Staff/>}/>
     <Route path="/profile" element={<Profile/>}/>
-    <Route path="/products/*" element={<Products/>}/>
+    <Route path="/products/" element={<Products/>}/>
     <Route path="/orders/" element={<Orders/>}/>
     <Route path='/inventory' element = {<Inventory/>}/>
     </Route>

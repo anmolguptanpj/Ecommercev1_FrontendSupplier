@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+
 import api from "../../api";
 import { useQuery } from "@tanstack/react-query";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
@@ -118,9 +118,9 @@ function Btn({ children, onClick, type = "button", variant = "default", disabled
 /* ─────────────────────────────────────────────
    Main Component
 ───────────────────────────────────────────── */
-export default function EditProducts() {
-  const navigate = useNavigate();
-  const { id } = useParams();
+export default function EditProducts({id,onClose}) {
+  
+
   const objectUrlsRef = useRef([]);
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -465,11 +465,8 @@ export default function EditProducts() {
                 Edit Product
               </Btn>
             )}
-            <Btn variant="default" onClick={() => navigate("/products")}>
+            <Btn variant="default" onClick={ onClose}>
               Back
-            </Btn>
-            <Btn variant="danger" onClick={() => navigate("/")}>
-              Close
             </Btn>
           </div>
         </div>
