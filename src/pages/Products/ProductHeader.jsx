@@ -6,7 +6,7 @@ import "./Products.css";
 function ProductHeader() {
   const links="hover:underline"
   return (
-    <div className='bg-blue-800 w-full h-20 flex flex-col items-center' id='Pr_HMain'>
+    <div className=' w-full h-20 flex shadow-2xs flex-col bg-gray-300 items-center' id='Pr_HMain'>
       <div className='h-10'>
          <h2 className='text-3xl  font-bold' id="Pr_HTitle">Product Management System </h2>
       </div>

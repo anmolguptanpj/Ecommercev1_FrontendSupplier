@@ -1,56 +1,82 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import React, { useState } from 'react'
-import api from '../../api'
+import React, { useState } from 'react';
+import api from '../../api';
 
-function Brands() {
+export default function Brands() {
+  const [brand, setBrand] = useState('');
 
-  const[brand,setBrand] = useState("");
-
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const {
-    mutate : createBrand,
-    isLoading : isCreatingBrand,
-    isError : createBrandIsError,
-    error: createBrandError
+    mutate: createBrand,
+    isLoading: isCreatingBrand,
+    isError: createBrandIsError,
+    error: createBrandError,
   } = useMutation({
-    mutationFn: async(newBrand) =>{
-    return await api.post('/brands',newBrand)
+    mutationFn: async (newBrand) => {
+      return await api.post('/brands', newBrand);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['brands'])
-      setBrand('')
-    }
-
-  })
+      queryClient.invalidateQueries(['brands']);
+      setBrand('');
+    },
+  });
 
   const handleBrand = (e) => {
     e.preventDefault();
-      if(!brand.trim()) return
-      createBrand({name:brand.trim()})
-  }
-  return (
-    <div>
-      <div className='w-full flex justify-center'>
-        <div className=''>
-          <form className='p-4' onSubmit={handleBrand}>
-          <fieldset className='p-5 border-3'>
-            <legend>Brand</legend>
-             <label>Brand:</label>
-       
-             
-             <div className='border-2'> <input className='w-100 focus:outline-none' type='text' value={brand} onChange={(e)=>setBrand(e.target.value)}/></div>
-           <div className='w-100 flex justify-center p-3'> <button className=' px-2 rounded-xl bg-green-500 hover:bg-blue-500' type='submit'>{isCreatingBrand ? 'Creating...' : 'Create Brand'} </button></div>
-           <div className='h-5 w-100'> {createBrandIsError && (<p>Error : {createBrandError?.message || 'Error creating category'}</p>)}</div>
-          
+    if (!brand.trim()) return;
+    createBrand({ name: brand.trim() });
+  };
 
-          </fieldset>
-            
+  return (
+    <div className="fixed inset-0 bg-gray-50 text-black">
+
+      {/* ── HEADER ── */}
+      <div className="sticky top-0 z-30 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-5">
+          <h1 className="text-3xl font-semibold">Brands</h1>
+          <p className="text-sm text-gray-500 mt-1">Create and manage product brands</p>
+        </div>
+      </div>
+
+      {/* ── BODY ── */}
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="bg-white border border-gray-200 rounded-3xl p-6 max-w-lg">
+          <h2 className="text-xl font-semibold mb-5">Create Brand</h2>
+
+          <form onSubmit={handleBrand} className="space-y-5">
+            {/* Input */}
+            <div>
+              <label className="text-sm text-gray-500">Brand Name</label>
+              <input
+                type="text"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                placeholder="e.g. Nike, Apple, Samsung"
+                className="w-full mt-2 border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-black transition text-sm"
+              />
+            </div>
+
+            {/* Error */}
+            <div className="h-5">
+              {createBrandIsError && (
+                <p className="text-red-500 text-sm">
+                  {createBrandError?.message || 'Error creating brand'}
+                </p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={isCreatingBrand}
+              className="w-full px-5 py-2.5 rounded-2xl bg-black text-white hover:opacity-90 transition font-medium text-sm disabled:opacity-50"
+            >
+              {isCreatingBrand ? 'Creating…' : 'Create Brand'}
+            </button>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default Brands

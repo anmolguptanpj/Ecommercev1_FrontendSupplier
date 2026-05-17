@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Orders from './pages/Orders/Orders'
+import Orders from './pages/Orders'
 import Payments from './pages/Payments'
 import Sales from './pages/Sales'
 import Return from './pages/Return'
@@ -20,13 +20,30 @@ import Inventory from './pages/Inventory'
 function App() {
 
   const PublicLayout = () =>(
-    <div id='main'>
-      <div id = 'header'><Header/></div>
-      <div id = 'body'>
-        <div className=' bg-yellow-300 shadow-2xl' id = "sidebar"><Sidebar/></div>
-        <div className='bg-blue-900 h-full w-full' id = 'outlet1'><Outlet/></div>
-      </div>
+  <div id='main' className='bg-white text-black'>
+  <div
+    id='header'
+    className='bg-white border-b border-gray-200'
+  >
+    <Header />
+  </div>
+
+  <div id='body'>
+    <div
+      className=' w-50 border-gray-400'
+      id='sidebar'
+    >
+      <Sidebar />
     </div>
+
+    <div
+      className='bg-white w-full'
+      id='outlet1'
+    >
+      <Outlet />
+    </div>
+  </div>
+</div>
   )
 
   const SecLayout = () => (
@@ -50,7 +67,7 @@ function App() {
     <Route path="/staff" element={<Staff/>}/>
     <Route path="/profile" element={<Profile/>}/>
     <Route path="/products/*" element={<Products/>}/>
-    <Route path="/orders/*" element={<Orders/>}/>
+    <Route path="/orders/" element={<Orders/>}/>
     <Route path='/inventory' element = {<Inventory/>}/>
     </Route>
 

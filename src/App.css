@@ -16,13 +16,8 @@
 }
 
 #body{
-     height: 90vh;
+     height: 90%;
      display: flex;
      width: 100vw;
      margin:0;
-}
-
-
-#sidebar{
-width:25vw;
 }

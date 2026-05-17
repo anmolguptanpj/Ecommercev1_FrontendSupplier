@@ -1,36 +1,61 @@
-import React from 'react'
-import { logout } from '../store/authSlice'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { logout } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-function Header() {
+const navLinks = [
+  { to: '/dashboard', label: 'Dashboard' },
+  { to: '/home',      label: 'Home'      },
+];
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const links = "bg-blue-400 rounded-xl p-1 w-21 text-center hover:bg-green-400"
+export default function Header() {
+  const dispatch   = useDispatch();
+  const navigate   = useNavigate();
+  const { pathname } = useLocation();
 
-
-  const handleLogout = () =>{
+  const handleLogout = () => {
     dispatch(logout());
-    navigate("/");
-  }
+    navigate('/');
+  };
+
   return (
-    
-      <div className=' bg-slate-950 h-full w-full flex flex-row justify-center items-center '>
-        <div className='w-[20%] flex justify-center items-center font-bold text-4xl'>
-          <p>Codex</p>
-        </div>
-        <div className='w-[80%] flex justify-evenly items-center'>
-          <Link className={links} to={'/dashboard'}>Dashboard</Link>
-          <Link className={links} to={'/home'}>Home</Link>
-          <button className={links} onClick={handleLogout}>
-        Logout
-        </button>
-        </div>
+    <div className="h-full w-full bg-white border-b border-gray-200 flex items-center px-6 gap-6">
+
+      {/* Brand */}
+      <div className="flex-shrink-0">
+        <span className="text-2xl font-semibold tracking-tight">Codex</span>
       </div>
-    
 
-  )
+      {/* Divider */}
+      <div className="h-6 w-px bg-gray-200" />
+
+      {/* Nav links */}
+      <nav className="flex items-center gap-2 flex-1">
+        {navLinks.map(({ to, label }) => {
+          const active = pathname === to;
+          return (
+            <Link
+              key={to}
+              to={to}
+              className={`px-4 py-2 rounded-2xl text-sm font-medium transition
+                ${active
+                  ? 'bg-black text-white'
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-black'
+                }`}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Logout */}
+      <button
+        onClick={handleLogout}
+        className="px-4 py-2 rounded-2xl border border-red-200 text-red-500 hover:bg-red-50 text-sm font-medium transition"
+      >
+        Logout
+      </button>
+    </div>
+  );
 }
-
-export default Header

@@ -14,7 +14,7 @@ function Insideheader({
   headerStyle={}
 }) {
   return (
-    <div className={`${className} h-15`} style={style}>
+    <div className={`${className} h-21 w-full`} style={style}>
       <h2 className={headerClass} style={{headerStyle}}>{headerTitle}</h2>
 
       <nav className={navClass} style={navStyle}>
