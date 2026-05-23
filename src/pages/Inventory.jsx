@@ -58,7 +58,26 @@ export default function Inventory() {
   return (
     <div className="w-full bg-gray-50 text-black">
 
-     
+       {/* ── HEADER ── */}
+    <div className="">
+      <div className="bg-white border border-gray-200  p-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Inventory Overview
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Track available stock, sales, revenue, and remaining inventory value
+          </p>
+        </div>
+
+        <div className="text-right">
+          <p className="text-sm text-gray-500">Total Products</p>
+          <p className="text-2xl font-semibold text-black">
+            {inventories.length}
+          </p>
+        </div>
+      </div>
+    </div>
 
       {/* ── BODY ── */}
       <div className="p-6">
