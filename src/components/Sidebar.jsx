@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../store/authSlice';
 
 import {
@@ -51,7 +51,13 @@ const navSections = [
   },
 ];
 
+
+
+
 function Tooltip({ label }) {
+
+
+  
   return (
     <span
       className="
@@ -72,6 +78,9 @@ function Tooltip({ label }) {
 }
 
 export default function Sidebar() {
+  const user = useSelector((state)=>state.auth.user);
+  const supplier = useSelector((state)=> state.auth.extraDetails)
+  
   const { pathname } = useLocation();
   const dispatch     = useDispatch();
   const navigate     = useNavigate();
@@ -228,8 +237,8 @@ export default function Sidebar() {
                 transitionDelay: open ? '60ms' : '0ms',
               }}
             >
-              <p className="text-[12px] font-semibold text-white/85 truncate">Alex Johnson</p>
-              <p className="text-[11px] text-white/35">Admin</p>
+              <p className="text-[12px] font-semibold text-white/85 truncate">{`${user.firstName} ${user.lastName}`}</p>
+              <p className="text-[11px] text-white/35">{supplier.supplierName}</p>
             </div>
             <IconDots
               size={14}
