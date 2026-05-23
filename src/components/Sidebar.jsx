@@ -1,5 +1,12 @@
-import React from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import {  logoutUser } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
+
+
+
+
 
 const navLinks = [
   { to: '/orders',    label: 'Orders',    icon: '📦' },
@@ -18,9 +25,23 @@ const navLinks = [
 
 export default function Sidebar() {
   const { pathname } = useLocation();
+  const dispatch   = useDispatch();
+
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate('/');
+  };
+
 
   return (
     <div className="flex flex-col h-full bg-white border-r border-gray-200 w-56 shrink-0">
+
+    {/* Brand */}
+      <div className="flex-shrink-0">
+        <span className="text-2xl font-semibold tracking-tight">Codex</span>
+      </div>
+
 
 
 
@@ -44,6 +65,15 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+
+      {/* Logout */}
+      <button
+        onClick={handleLogout}
+        className="px-4 py-2 rounded-2xl border border-red-200 text-red-500 hover:bg-red-50 text-sm font-medium transition"
+      >
+        Logout
+      </button>
 
     </div>
   );

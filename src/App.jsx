@@ -9,7 +9,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import Header from './components/Header'
+
 import Sidebar from './components/Sidebar'
 
 import Login from './pages/Login'
@@ -45,29 +45,11 @@ function App() {
   }, [dispatch])
 
   const PublicLayout = () => (
-    <div id='main' className='bg-white text-black'>
-      <div
-        id='header'
-        className='bg-white border-b border-gray-200'
-      >
-        <Header />
-      </div>
-
-      <div id='body'>
-        <div
-          className='w-50 border-gray-400'
-          id='sidebar'
-        >
+    <div id='main' className='bg-white flex text-black'>
+      
           <Sidebar />
-        </div>
-
-        <div
-          className='bg-white w-full'
-          id='outlet1'
-        >
           <Outlet />
-        </div>
-      </div>
+    
     </div>
   )
 
