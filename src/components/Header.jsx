@@ -1,5 +1,5 @@
 import React from 'react';
-import { logout } from '../store/authSlice';
+import {  logoutUser } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ export default function Header() {
   const { pathname } = useLocation();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutUser());
     navigate('/');
   };
 

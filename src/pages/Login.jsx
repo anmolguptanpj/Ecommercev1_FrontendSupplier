@@ -1,45 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../store/authSlice'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.auth
-  )
+  );
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [show, setShow] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
 
-  const loginFrom = 'SUPPLIER'
+  const loginFrom = "SUPPLIER";
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    dispatch(login({ email, password, loginFrom }))
-      .unwrap()
-      .then(() => {
-        navigate('/home')
-      })
-      .catch((error) =>
-        console.log('Login Failed:', error)
-      )
-  }
+    try {
+      await dispatch(
+        login({
+          email,
+          password,
+          loginFrom,
+        })
+      ).unwrap();
+
+      navigate("/home");
+    } catch (err) {
+      console.log("Login Failed:", err);
+    }
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/home')
+      navigate("/home");
     }
-  }, [isAuthenticated, navigate])
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
       <div className="w-full max-w-md">
-        {/* Card */}
         <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
           {/* Header */}
           <div className="mb-8">
@@ -67,10 +71,7 @@ function Login() {
           )}
 
           {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-5"
-          >
+          <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div>
               <label className="text-sm text-gray-500">
@@ -81,9 +82,7 @@ function Login() {
                 type="email"
                 placeholder="Enter Email"
                 value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="
                   w-full
@@ -106,12 +105,10 @@ function Login() {
               </label>
 
               <input
-                type={show ? 'text' : 'password'}
+                type={show ? "text" : "password"}
                 placeholder="Enter Password"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="
                   w-full
@@ -130,9 +127,7 @@ function Login() {
                 <input
                   type="checkbox"
                   checked={show}
-                  onChange={() =>
-                    setShow((prev) => !prev)
-                  }
+                  onChange={() => setShow((prev) => !prev)}
                   className="w-4 h-4 accent-black"
                 />
 
@@ -155,20 +150,18 @@ function Login() {
                 font-medium
                 ${
                   loading
-                    ? 'bg-gray-400'
-                    : 'bg-black hover:opacity-90'
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-black hover:opacity-90"
                 }
               `}
             >
-              {loading
-                ? 'Logging in...'
-                : 'Login'}
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
